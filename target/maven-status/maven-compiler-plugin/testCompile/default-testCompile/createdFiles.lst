@@ -1,0 +1,16 @@
+payloads\request\CreateUserRequest.class
+utils\TestListener.class
+utils\RequestSpecBuilderUtil.class
+services\UserService.class
+utils\TestContext.class
+config\EnvManager.class
+runners\TestRunner.class
+base\BaseRequest.class
+config\ConfigReader.class
+config\Environment.class
+utils\LoggerUtil.class
+utils\TokenManager.class
+client\RestClient.class
+utils\ExtentManager.class
+hooks\Hooks.class
+stepdefinitions\UserSteps.class

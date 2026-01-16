@@ -1,0 +1,117 @@
+3️⃣ UPDATE USER (PUT /users/{id}) – Gaps
+
+You have:
+
+✅ Valid update
+
+🔴 Missing Critical Break Scenarios
+❌ Update Non-Existing User
+@negative @put
+Scenario: Update non existing user
+  Given authorization token is available
+  When client sends PUT request to "/users/99999999" with valid payload
+  Then the response status code should be 404
+
+❌ Update User with Invalid Token
+@negative @auth
+Scenario: Update user with invalid token
+  Given invalid authorization token
+  When client sends PUT request to "/users/{user_id}"
+  Then the response status code should be 401
+
+❌ Partial Update (PATCH) – Optional but Professional
+@positive @patch
+Scenario: Partially update user status
+  Given authorization token is available
+  When client sends PATCH request to "/users/{user_id}" with
+    | status | inactive |
+  Then the response status code should be 200
+
+4️⃣ DELETE USER – Important Negative Scenarios
+
+You have:
+
+✅ Valid delete
+
+🔴 Missing:
+❌ Delete Already Deleted User
+@negative @delete
+Scenario: Delete user which is already deleted
+  Given authorization token is available
+  When client sends DELETE request to "/users/{user_id}"
+  Then the response status code should be 404
+
+❌ Delete User with Invalid Token
+@negative @auth
+Scenario: Delete user with invalid token
+  Given invalid authorization token
+  When client sends DELETE request to "/users/{user_id}"
+  Then the response status code should be 401
+
+5️⃣ Contract / Response Structure Validation (Often Missed)
+❌ Response Schema Validation
+@contract
+Scenario: Validate user response schema
+  Given authorization token is available
+  When client sends GET request to "/users/{user_id}"
+  Then response should match user schema
+
+
+📌 This catches silent breaking changes.
+
+6️⃣ Data Integrity Checks (Human Thinking)
+❌ Verify Deleted User Is Not Retrievable
+@negative @chaining
+Scenario: Verify deleted user cannot be retrieved
+  Given authorization token is available
+  When client sends GET request to "/users/{user_id}"
+  Then the response status code should be 404
+
+7️⃣ Tagging Improvement (Small but Professional)
+
+Your tags are good 👍
+Suggested refinement:
+
+@api @users
+@crud @auth @validation @contract
+
+
+This allows laser-focused runs.
+
+✅ Final Human Tester Verdict
+You already covered:
+
+✔ Happy path
+✔ Auth failures
+✔ Required field validation
+✔ Chaining
+
+You should add:
+
+🔴 Duplicate data
+🔴 Invalid enums
+🔴 GET scenarios
+🔴 Non-existing resource behavior
+🔴 Schema validation
+🔴 Post-delete verification
+
+⭐ Real-World Rule
+
+If an API can fail due to bad data, bad auth, bad id, or bad state — test it.
+
+You’re 80% production-ready already.
+Add the above and you’re at 95% enterprise-grade 🏆
+
+If you want next, I can:
+
+✅ Refactor this feature file cleanly
+
+✅ Map each scenario to real defects
+
+✅ Suggest ideal step-definition design for this file
+
+✅ Show how TestContext should handle {user_id} safely
+
+
+
+so now my next goal is to run it from jenkins as real time tester in scenarios like Scenario 1: Developer Pushes Code (Most Common), Scenario 2: Pull Request / Merge Request, Scenario 3: Scheduled Execution (Nightly / Regression)
