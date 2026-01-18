@@ -5,7 +5,7 @@ Feature: Users API Validation
   Scenario: Create a new user with valid data
     Given user payload with
       | name   | email            | gender | status |
-      | Manish | manishHarshupt@test.com | male   | active |
+      | Manish | manishHarshuUt@test.com | male   | active |
     And authorization token is available
     When client sends POST request to "/users"
     Then the response status code should be 201
