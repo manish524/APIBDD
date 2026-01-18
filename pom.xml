@@ -160,6 +160,7 @@
 					</suiteXmlFiles>
 					<systemPropertyVariables>
 						<env>${env}</env>
+						<AUTH_TOKEN>${AUTH_TOKEN}</AUTH_TOKEN>
 						<cucumber.filter.tags>${cucumber.filter.tags}</cucumber.filter.tags>
 					</systemPropertyVariables>
 				</configuration>
