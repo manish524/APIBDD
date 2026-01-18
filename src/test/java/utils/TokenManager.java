@@ -35,7 +35,7 @@ public class TokenManager {
 //        );
     	
 
-        String accessToken = ConfigReader.get("auth.token");
+        String accessToken = System.getProperty("AUTH_TOKEN");
 
         token.set(accessToken);
     }
